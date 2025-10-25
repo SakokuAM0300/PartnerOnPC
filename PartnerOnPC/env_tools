@@ -1,4 +1,7 @@
 venv
+cuda
+Pytorch
+
 VoiceVox
 Whisper(Local)
 google gemini API
