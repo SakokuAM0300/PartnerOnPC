@@ -76,7 +76,6 @@ async def record_and_transcribe():
     
     # === VADによる自動録音ループ ===
     while True:
-        # NOTE: sd.InputStream.read() はブロッキング関数だが、このタスクはIO待ちのため問題ない
         audio_frame, overflowed = stream.read(FRAME_SIZE)
         is_speech = vad.is_speech(audio_frame.tobytes(), RATE)
         
@@ -139,7 +138,7 @@ async def generate_gemini_stream(prompt_text, conversation_history):
     print("🤖 Gemini: 応答生成を開始します...")
     
     # プロンプト設定
-    system_instruction = "あなたはユーザーの作業中の話し相手となる、知識が豊富で受動的な女性アシスタントの「こよみ」です。質問には簡潔に、親しみやすいトーンで答えてください。ゆったりした話し方で、ため口での会話をしてください。応答に特殊文字や絵文字を含めないでください。箇条書きでの回答を控えてください。事実の回答を除いて断言を控えてください。AI側から積極的に話題を振らないでください。"
+    system_instruction = "あなたはユーザーの作業中の話し相手となる、知識が豊富で受動的なアシスタントです。質問には簡潔に、親しみやすいトーンで答えてください。応答に特殊文字や絵文字を含めないでください。箇条書きでの回答を控えてください。事実の回答を除いて断言を控えてください。AI側から積極的に話題を振らないでください。"
     
     # 最新のユーザー入力を履歴に追加 (Gemini APIに渡すためのmessagesリストを作成)
     messages_to_send = []
@@ -184,11 +183,10 @@ async def generate_gemini_stream(prompt_text, conversation_history):
         yield "API接続でエラーが発生しました。時間を置いて再度お話しください。"
 
 # ====================================================================
-# III. 音声出力 (TTS: VOICEVOX) - 変更なし
+# III. 音声出力 (TTS: VOICEVOX)
 # ====================================================================
 
 async def generate_and_play_tts(text_stream):
-    # ... (VOICEVOXのコードは、gpt_tts_pipeline.pyから変更なくここに貼り付けます) ...
     full_text = ""
     sentence_buffer = "" 
     
@@ -253,4 +251,5 @@ async def _call_voicevox_api(text):
         
     except requests.exceptions.RequestException as e:
         print(f"❌ VOICEVOX APIエラー: {e} (テキスト: \"{text}\")")
+
         return None
