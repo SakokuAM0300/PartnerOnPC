@@ -12,8 +12,8 @@ NVIDIA Driver & CUDA: GPUによる高速化を利用する場合、適切なド�
 2. 環境構築
 Python 3.10以上の環境で、仮想環境を作成し依存ライブラリをインストールします。
 
-Bash
-# 仮想環境の作成
+
+ 仮想環境の作成
 python -m venv venv
 
 # 仮想環境の有効化 (Windows)
