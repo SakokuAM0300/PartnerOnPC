@@ -6,9 +6,12 @@ APIを利用したデスクトップ向け対話型エージェント・イン�
 既存のブラウザベースのチャットUIではなく、デスクトップ環境に特化した軽量なインターフェースを提供し、API連携による柔軟な応答生成を実現しています。
 
 2. 技術スタック
-Frontend: HTML5, CSS3, JavaScript (ES6+)
-Backend / Integration: Node.js, OpenAI API (または各モデルAPI)
-Version Control: Git / GitHub
+Deep Learning Framework: PyTorch v2.9.0 (with CUDA 12.6 support)
+Parallel Computing: NVIDIA CUDA v12.9 / NVCC V12.9.86
+LLM API: Google Gemini API
+Speech-to-Text: OpenAI Whisper (Local, GPU Accelerated)
+Text-to-Speech: Voicevox
+Python: v3.10+ (venv推奨)
 
 3. システム構成
 User Interface: ユーザー入力を受け取り、チャットログをリアルタイムにレンダリング。
